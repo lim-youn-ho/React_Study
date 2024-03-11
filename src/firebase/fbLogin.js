@@ -1,17 +1,19 @@
-import { auth } from './fbInstance';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { authService } from '@Firebase/fbInstance';
+import { GoogleAuthProvider, signInWithPopup,getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
 import axios from 'axios';
 
 function App() {
     const [userData, setUserData] = useState(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(authService.currentUser);
+    console.log(isLoggedIn);
 
+    //구글 로그인
     function handleGoogleLogin() {
-        const provider = new GoogleAuthProvider(); // provider를 구글로 설정
-        signInWithPopup(auth, provider) // popup을 이용한 signup
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(authService, provider)
             .then((data) => {
                 setUserData(data.user); // user data 설정
-                console.log(data) // console로 들어온 데이터 표시
                 saveUserData();
             })
             .catch((err) => {
@@ -19,25 +21,32 @@ function App() {
             });
     }
 
+
     function saveUserData(){
         console.log(userData)
-        axios(
+        console.log(userData.email)
+        axios.post('/api/saveUser',
             {
-                url: '/saveUser',
-                method: 'post',
-                data: {
-                    userData:userData
-                }
+                    name:userData.displayName,
+                    email:userData.email
             }
         ).then(function (response) {
             console.log(response.data);
         });
     }
 
+    const handleGoogleLogout = () => {
+        authService.signOut();
+
+    }
+
+
+
     return (
         <div>
 
             <button onClick={handleGoogleLogin}>Login</button>
+            <button onClick={handleGoogleLogout}>Logout</button>
             {userData ? userData.displayName : null}
         </div>
     );

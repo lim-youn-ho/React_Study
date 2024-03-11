@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "sourceMap": true
+  },
+  "extends": "./tsconfig.paths.json",
+  "exclude": [
+    "node_modules"
+  ]
+}

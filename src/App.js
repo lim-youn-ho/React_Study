@@ -1,4 +1,4 @@
-import Main from "./firebase/fbLogin";
+import Main from "@Firebase/fbLogin";
 
 
 import {BrowserRouter as Router,

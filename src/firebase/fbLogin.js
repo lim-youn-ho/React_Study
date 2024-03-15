@@ -1,6 +1,8 @@
 import  {authService}  from '@Firebase/fbInstance';
 import { GoogleAuthProvider, signInWithPopup,getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from 'firebase/auth';
 import {useEffect, useState,ReactNode} from 'react';
+import { useNavigate } from "react-router-dom";
+
 import axios from 'axios';
 
 
@@ -10,7 +12,6 @@ function App() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [newAccount, setNewAccount] = useState(true); // 계정 유무애 따라 계정을 생성하거나 로그인
 
     useEffect(() => {
         authService.onAuthStateChanged((user) => {
@@ -24,16 +25,14 @@ function App() {
         });
     }, []);
 
-    const Submit = async (evt) => {
+    const LogIn = async (evt) => {
         evt.preventDefault();
         try {
             let data;
-            console.log(newAccount);
-            if (newAccount) { // create account
-                data = await createUserWithEmailAndPassword(authService, email, password);
-            }else { // log in
-                data = await signInWithEmailAndPassword(authService, email, password);
-            }console.log(data);
+             // log in
+            data =  await signInWithEmailAndPassword(authService, email, password);
+            setUserData(data.user);
+            console.log(userData);
             } catch (error) {
             console.log(error);
             }
@@ -80,12 +79,18 @@ function App() {
             console.log(response.data);
         });
     }
+
+    //로그아웃
     const auth = getAuth();
     const handleGoogleLogout = () => {
         auth.signOut();
 
     }
-
+    //회원가입
+    const navigate = useNavigate();
+    const goToSign = () => {
+        navigate("/SignUp");
+    }
 
     return (
 
@@ -94,7 +99,8 @@ function App() {
             <input type="text" id="email" value={email} onChange={(e) => setEmail(e.target.value)} maxLength={20} />
             <label htmlFor="password">비밀번호</label>
             <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} maxLength={20} />
-            <button onClick={Submit} >회원가입</button>
+            <button onClick={LogIn} >로그인</button>
+            <button onClick={goToSign} >회원가입</button>
 
 
 

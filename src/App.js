@@ -1,5 +1,6 @@
 import Main from "@Firebase/fbLogin";
 import SignUp from "@Pages/signUp";
+import Header from "@Components/Header";
 
 
 import {BrowserRouter as Router,
@@ -11,6 +12,7 @@ function App() {
 
   return (
       <Router>
+        <Header />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/SignUp" element={<SignUp />} />

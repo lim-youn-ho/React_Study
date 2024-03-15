@@ -4,7 +4,9 @@
       "paths": {
         "@/*": ["./src/*"],
         "@Pages/*": ["./src/pages/*"],
-          "@Firebase/*": ["./src/firebase/*"]
+        "@Components/*": ["./src/components/*"],
+        "@Styles/*": ["./src/styles/*"],
+        "@Firebase/*": ["./src/firebase/*"]
       }
   }
 }

@@ -1,25 +1,20 @@
 header {
     background-color: transparent;
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-top: 16px;
-    padding-bottom: 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 header img {
-    height: 12rem;
+    height: 4rem;
 }
 .logo {
     display: flex;
     align-items: center;
-    height: 6rem;
-    padding: 12px;
+    height: 5rem;
 }
 
 .logo img {
-    height: 6rem;
+    height: 4rem;
 }
 
 .logo h1 {

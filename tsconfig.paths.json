@@ -6,6 +6,7 @@
         "@Pages/*": ["./src/pages/*"],
         "@Components/*": ["./src/components/*"],
         "@Styles/*": ["./src/styles/*"],
+        "@Hooks/*": ["./src/hooks/*"],
         "@Firebase/*": ["./src/firebase/*"]
       }
   }

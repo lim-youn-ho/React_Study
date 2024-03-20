@@ -105,7 +105,7 @@ function App() {
 
 
             <button onClick={handleGoogleLogin}>GoogleLogin</button>
-            <button onClick={handleGoogleLogout}>Logout</button>
+
             {userData ? userData.displayName : null}
         </div>
     );

@@ -1,4 +1,4 @@
-import Main from "@Firebase/fbLogin";
+import LogIn from "@Firebase/fbLogin";
 import SignUp from "@Pages/signUp";
 import Header from "@Components/Header";
 
@@ -14,7 +14,7 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/LogIn" element={<LogIn />} />
           <Route path="/SignUp" element={<SignUp />} />
         </Routes>
       </Router>

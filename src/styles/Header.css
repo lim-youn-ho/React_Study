@@ -23,6 +23,7 @@ header img {
     font-weight: bold;
 }
 
+
 .dropdown {
     position: relative;
     display: inline-block;
@@ -60,6 +61,12 @@ header img {
 .dropdown:hover .dropbtn {
     background-color: #f1f1f1;
 }
+
+
+nav {
+    float: right;
+}
+
 @font-face {
     font-family: 'TheJamsil5Bold';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');

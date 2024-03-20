@@ -28,7 +28,7 @@ function signUp() {
             <input type="text" id="email" value={email} onChange={(e) => setEmail(e.target.value)} maxLength={20} />
             <label htmlFor="password">비밀번호</label>
             <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} maxLength={20} />
-            <button onClick={userSignUp} >회원등록</button>
+            <button onClick={userSignUp} >회원가입</button>
         </div>
     );
 }

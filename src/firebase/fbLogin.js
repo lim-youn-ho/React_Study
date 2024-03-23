@@ -1,7 +1,8 @@
 import  {authService}  from '@Firebase/fbInstance';
-import { GoogleAuthProvider, signInWithPopup,getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from 'firebase/auth';
-import {useEffect, useState,ReactNode} from 'react';
+import { GoogleAuthProvider, signInWithPopup,getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import {useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
+import {Card, Box, CardActions, Button, Container, Stack, TextField} from '@mui/material';
 
 import axios from 'axios';
 
@@ -94,20 +95,27 @@ function App() {
 
     return (
 
-        <div>
-            <label htmlFor="id">이메일</label>
-            <input type="text" id="email" value={email} onChange={(e) => setEmail(e.target.value)} maxLength={20} />
-            <label htmlFor="password">비밀번호</label>
-            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} maxLength={20} />
-            <button onClick={LogIn} >로그인</button>
-            <button onClick={goToSign} >회원가입</button>
+        <Container maxWidth="sm">
 
+            <br/>
+            <Box sx={{ bgcolor: '#ffffff', height: '100vh' }} >
+                <br/>
+                <Stack spacing={2} direction="row" justifyContent="center">
+                    <TextField value={email} onChange={(e) => setEmail(e.target.value)} maxLength={20} required id="outlined-required" label="이메일" defaultValue="이메일"/>
+                    <TextField value={password} onChange={(e) => setPassword(e.target.value)} maxLength={20}  required id="outlined-required" label="패스워드" defaultValue="패스워드"/>
+                </Stack>
+                <br/>
+                <Stack spacing={2} direction="row" justifyContent="center">
 
+                    <Button  variant="contained" size="small" onClick={LogIn}>로그인</Button>
+                    <Button variant="contained"  size="small" onClick={goToSign}>이 아이디로 회원가입</Button>
+                </Stack>
 
+            </Box>
             <button onClick={handleGoogleLogin}>GoogleLogin</button>
 
             {userData ? userData.displayName : null}
-        </div>
+        </Container>
     );
 }
 

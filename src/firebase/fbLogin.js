@@ -1,5 +1,11 @@
 import  {authService}  from '@Firebase/fbInstance';
-import { GoogleAuthProvider, signInWithPopup,getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import {
+    GoogleAuthProvider,
+    signInWithPopup,
+    getAuth,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword
+} from 'firebase/auth';
 import {useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import {Card, Box, CardActions, Button, Container, Stack, TextField} from '@mui/material';
@@ -13,6 +19,7 @@ function App() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
         authService.onAuthStateChanged((user) => {
@@ -33,27 +40,15 @@ function App() {
              // log in
             data =  await signInWithEmailAndPassword(authService, email, password);
             setUserData(data.user);
-            console.log(userData);
+            sessionStorage.setItem('userData', userData)
+            navigate("/Main");
+
             } catch (error) {
-            console.log(error);
+
             }
         };
 
 
-
-    //로그인 로그아웃 상태 확인
-    useEffect(() => {
-        authService.onAuthStateChanged((user) => {
-            if (user) {
-                // 로그인 된 상태일 경우
-                setIsLoggedIn(true);
-            } else {
-                // 로그아웃 된 상태일 경우
-                setIsLoggedIn(false);
-            }
-            console.log(isLoggedIn);
-        });
-    }, []);
 
     //구글 로그인
     function handleGoogleLogin() {
@@ -87,10 +82,15 @@ function App() {
         auth.signOut();
 
     }
-    //회원가입
-    const navigate = useNavigate();
-    const goToSign = () => {
-        navigate("/SignUp");
+
+    const userSignUp = async () => {
+        try {
+            await createUserWithEmailAndPassword(authService, email, password);
+            navigate("/Main");
+        }catch (error){
+            console.log(error);
+        }
+
     }
 
     return (
@@ -108,7 +108,7 @@ function App() {
                 <Stack spacing={2} direction="row" justifyContent="center">
 
                     <Button  variant="contained" size="small" onClick={LogIn}>로그인</Button>
-                    <Button variant="contained"  size="small" onClick={goToSign}>이 아이디로 회원가입</Button>
+                    <Button variant="contained"  size="small" onClick={userSignUp}>이 아이디로 회원가입</Button>
                 </Stack>
 
             </Box>

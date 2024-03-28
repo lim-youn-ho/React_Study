@@ -14,16 +14,23 @@ import {
 } from '@mui/material';
 import {ExpandLess, ExpandMore, Logout, PersonAdd} from '@mui/icons-material';
 import {Fragment, useState} from "react";
+import {getAuth} from "firebase/auth";
 
 
 
 function Header(){
     const navigate  = useNavigate();
-
+    const auth = getAuth();
     function handleLogoClick() {
-        navigate("/");
+        navigate("/Main");
     }
 
+
+
+    const handleGoogleLogout = () => {
+        auth.signOut();
+        navigate("/Main");
+    }
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -85,7 +92,7 @@ function Header(){
                                 LogIn
                             </MenuItem>
 
-                            <MenuItem onClick={handleClose}>
+                            <MenuItem onClick={handleGoogleLogout}>
                                 <ListItemIcon>
                                     <Logout fontSize="small" />
                                 </ListItemIcon>

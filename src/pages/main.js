@@ -12,6 +12,7 @@ function main() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         authService.onAuthStateChanged((user) => {
+
             if (user) {
                 // 로그인 된 상태일 경우
                 setIsLoggedIn(true);
@@ -20,6 +21,7 @@ function main() {
                 // 로그아웃 된 상태일 경우
                 setIsLoggedIn(false);
             }
+
            console.log(user);
 
         });
@@ -27,7 +29,7 @@ function main() {
 
     return(
         <Container>
-            {userData ? userData.email : null}
+            {isLoggedIn ? null : null}
         </Container>
     );
 }

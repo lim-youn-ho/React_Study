@@ -13,12 +13,15 @@ import {
     Avatar, Divider
 } from '@mui/material';
 import {ExpandLess, ExpandMore, Logout, PersonAdd} from '@mui/icons-material';
-import {Fragment, useState} from "react";
+import {Fragment, useEffect, useState} from "react";
 import {getAuth} from "firebase/auth";
+import { authService } from "@Firebase/fbInstance";
 
 
 
 function Header(){
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userData, setUserData] = useState(null);
     const navigate  = useNavigate();
     const auth = getAuth();
     function handleLogoClick() {
@@ -44,6 +47,24 @@ function Header(){
         navigate("/LogIn");
         setAnchorEl(null);
     }
+
+
+    useEffect(() => {
+        const unsubscribe = authService.onAuthStateChanged((user) => {
+            if (user) {
+                setIsLoggedIn(true);
+                setUserData(user);
+            } else {
+                setIsLoggedIn(false);
+                setUserData(null);
+            }
+        });
+
+        // useEffect의 cleanup 함수에서 이벤트 리스너 구독 해제
+        return () => unsubscribe();
+    }, []);
+
+
     return(
         <AppBar className="AppBar"  position="static"
                 sx={{
@@ -80,24 +101,29 @@ function Header(){
                             }}
 
                         >
-                            <MenuItem onClick={handleClose}>
-                                <Avatar /> 프로필
-                            </MenuItem>
-                            <Divider />
 
-                            <MenuItem onClick={goToSign}>
-                                <ListItemIcon>
-                                    <PersonAdd fontSize="small" />
-                                </ListItemIcon>
-                                LogIn
-                            </MenuItem>
-
-                            <MenuItem onClick={handleGoogleLogout}>
-                                <ListItemIcon>
-                                    <Logout fontSize="small" />
-                                </ListItemIcon>
-                                Logout
-                            </MenuItem>
+                            {!isLoggedIn &&  (
+                                <MenuItem onClick={goToSign}>
+                                    <ListItemIcon>
+                                        <PersonAdd fontSize="small" />
+                                    </ListItemIcon>
+                                    LogIn
+                                </MenuItem>
+                            )}
+                            {isLoggedIn &&  (
+                            <div>
+                                <MenuItem onClick={handleClose}>
+                                    <Avatar /> 마이페이지
+                                </MenuItem>
+                                <Divider />
+                                <MenuItem onClick={handleGoogleLogout}>
+                                    <ListItemIcon>
+                                        <Logout fontSize="small" />
+                                    </ListItemIcon>
+                                    Logout
+                                </MenuItem>
+                            </div>
+                            )}
                         </Menu>
                     </Fragment>
 

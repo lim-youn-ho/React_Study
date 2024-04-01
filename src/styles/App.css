@@ -27,6 +27,27 @@
 .App-link {
   color: #61dafb;
 }
+footer {
+  height: 100px;
+  position: fixed; /* 고정 위치로 설정 */
+  bottom: 0; /* 페이지의 하단에 배치 */
+  left: 0; /* 페이지의 좌측에 배치 */
+  width: 100%; /* 전체 너비를 차지하도록 설정 */
+  border-top: 1px solid transparent;
+  box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.32); /* 음영 처리 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1e1e1e;
+
+  color: white; /* 글자색을 흰색으로 설정 */
+  font-size: 11px; /* 폰트 크기를 16px로 설정 */
+}
+
+body {
+  overflow-y: scroll;
+}
+
 
 @keyframes App-logo-spin {
   from {
@@ -36,3 +57,5 @@
     transform: rotate(360deg);
   }
 }
+
+

@@ -1,6 +1,6 @@
 
 import "@Styles/Header.css"
-import logo from "@Styles/shareHouseLogo.jpg";
+import logo from "@Styles/shareHouseLogo.png";
 import {Link,useNavigate} from "react-router-dom";
 import {
     AppBar,

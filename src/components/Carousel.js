@@ -1,74 +1,66 @@
-import React, { useRef,useState, MouseEvent  } from 'react';
-import '@Styles/Carousel.css';
-import {click} from "@testing-library/user-event/dist/click";
-
-function Carousel() {
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const slides = ["Slide 1", "Slide 2", "Slide 3", "Slide 3", "Slide 3", "Slide 3"]; // 슬라이드에 표시할 내용
-    const containerRef = useRef(null);
-
-    const [dragging, setDragging] = useState(false);
-    const [clickPoint, setClickPoint] = useState(0);
-    const [scrollLeft, setScrollLeft] = useState(0);
+import React from 'react'
+import { DotButton, useDotButton } from '@Components/EmblaCarouselDotButton'
+import {
+    PrevButton,
+    NextButton,
+    usePrevNextButtons
+} from '@Components//EmblaCarouselArrowButtons'
+import useEmblaCarousel from 'embla-carousel-react'
+import '@Styles/Carousel.css'
 
 
-    const handleMouseDownEvent = (e: MouseEvent<HTMLDivElement>) => {
-        setDragging(true);
-        if (containerRef.current) {
-            setClickPoint(e.pageX);
-            console.log(clickPoint);
-            setScrollLeft(containerRef.current.scrollLeft);
-            console.log(scrollLeft);
-        }
-    };
+const Carousel = () => {
+    const options = { containScroll: false }
+    const SLIDE_COUNT = 5
+    const slides = Array.from(Array(SLIDE_COUNT).keys())
 
-    const handleMouseMoveEvent = (e: MouseEvent<HTMLDivElement>) => {
-        if (!dragging) return;
+    const [emblaRef, emblaApi] = useEmblaCarousel(options)
 
-        e.preventDefault();
+    const { selectedIndex, scrollSnaps, onDotButtonClick } =
+        useDotButton(emblaApi)
 
-        if (containerRef.current) {
-            const walk = e.pageX - clickPoint;
-
-            containerRef.current.scrollLeft = scrollLeft - walk;
-        }
-    };
-
-    const goToPrevSlide = () => {
-        if (currentSlide === 0) return; // 첫 번째 슬라이드일 때 클릭 무시
-        setCurrentSlide((prevSlide) => prevSlide - 1);
-        console.log(currentSlide);
-        /*setCurrentSlide((prevSlide) => (prevSlide === 0 ? slides.length - 1 : prevSlide - 1));*/
-    };
-
-    const goToNextSlide = () => {
-        if (currentSlide === slides.length - 1) return; // 마지막 슬라이드일 때 클릭 무시
-        setCurrentSlide((prevSlide) => prevSlide + 1);
-        console.log(currentSlide);
-        /*setCurrentSlide((prevSlide) => (prevSlide === slides.length - 1 ? 0 : prevSlide + 1));*/
-    };
+    const {
+        prevBtnDisabled,
+        nextBtnDisabled,
+        onPrevButtonClick,
+        onNextButtonClick
+    } = usePrevNextButtons(emblaApi)
 
     return (
-        <div className="carousel-container">
-            <button className="prev-button" onClick={goToPrevSlide}>&lt;</button>
-            <div className="slide-container"
-                 ref={containerRef}
-                 onMouseDown={handleMouseDownEvent}
-                 onMouseLeave={() => setDragging(false)}
-                 onMouseUp={() => setDragging(false)}
-                 onMouseMove={handleMouseMoveEvent}>
-                <div className="slide-track" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
-                    {slides.map((slide, index) => (
-                        <div key={index} className="slide-item">
-                            {slide}
+        <section className="embla">
+            <div className="embla__viewport" ref={emblaRef}>
+                <div className="embla__container">
+                    {slides.map((index) => (
+                        <div className="embla__slide" key={index}>
+                            <div className="embla__slide__number">{index + 1}</div>
                         </div>
                     ))}
                 </div>
             </div>
-            <button className="next-button" onClick={goToNextSlide}>&gt;</button>
 
-        </div>
-    );
+            <div className="embla__controls">
+
+                <div className="embla_prev_buttons">
+                    <PrevButton  onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+                </div>
+                <div className="embla_next_buttons">
+                    <NextButton  onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+                </div>
+
+               {/* <div className="embla__dots">
+                    {scrollSnaps.map((_, index) => (
+                        <DotButton
+                            key={index}
+                            onClick={() => onDotButtonClick(index)}
+                            className={'embla__dot'.concat(
+                                index === selectedIndex ? ' embla__dot--selected' : ''
+                            )}
+                        />
+                    ))}
+                </div>*/}
+            </div>
+        </section>
+    )
 }
 
-export default Carousel;
+export default Carousel

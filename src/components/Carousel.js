@@ -47,17 +47,7 @@ const Carousel = () => {
                     <NextButton  onClick={onNextButtonClick} disabled={nextBtnDisabled} />
                 </div>
 
-               {/* <div className="embla__dots">
-                    {scrollSnaps.map((_, index) => (
-                        <DotButton
-                            key={index}
-                            onClick={() => onDotButtonClick(index)}
-                            className={'embla__dot'.concat(
-                                index === selectedIndex ? ' embla__dot--selected' : ''
-                            )}
-                        />
-                    ))}
-                </div>*/}
+
             </div>
         </section>
     )

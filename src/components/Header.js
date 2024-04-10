@@ -10,12 +10,13 @@ import {
     ListItemText,
     Menu,
     MenuItem,
-    Avatar, Divider
+    Avatar, Divider, SvgIcon
 } from '@mui/material';
-import {ExpandLess, ExpandMore, Logout, PersonAdd} from '@mui/icons-material';
+import {ExpandLess, ExpandMore, Logout, PersonAdd } from '@mui/icons-material';
 import {Fragment, useEffect, useState} from "react";
 import {getAuth} from "firebase/auth";
 import { authService } from "@Firebase/fbInstance";
+import BuildCircleIcon from '@mui/icons-material/BuildCircle';
 
 
 
@@ -46,6 +47,11 @@ function Header(){
     const goToSign = () => {
         navigate("/LogIn");
         setAnchorEl(null);
+    }
+
+    const GoToAdmin = () => {
+        navigate("/Admin");
+
     }
 
 
@@ -97,7 +103,7 @@ function Header(){
                             onClick={handleClose}
                             PaperProps={{
                                 elevation: 0,
-                                sx: {overflow: 'visible', filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))', mt: 1.5, '& .MuiAvatar-root': {width: 32, height: 32, ml: -0.5, mr: 1,}, '&::before': {content: '""', display: 'block', position: 'absolute', top: 0, right: 14, width: 10, height: 10, bgcolor: 'background.paper', transform: 'translateY(-50%) rotate(45deg)', zIndex: 0,},},
+                                sx: {overflow: 'visible', filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))', mt: 1.5, '& .MuiAvatar-root': {width: 32, height: 32, ml: -0.5, mr: 1,}, '& .css-tzssek-MuiSvgIcon-root': {width: 32, height: 32, ml: -0.5, mr: 1,}, '&::before': {content: '""', display: 'block', position: 'absolute', top: 0, right: 14, width: 10, height: 10, bgcolor: 'background.paper', transform: 'translateY(-50%) rotate(45deg)', zIndex: 0,},},
                             }}
 
                         >
@@ -114,6 +120,10 @@ function Header(){
                             <div>
                                 <MenuItem onClick={handleClose}>
                                     <Avatar /> 마이페이지
+                                </MenuItem>
+                                <MenuItem onClick={GoToAdmin}>
+                                    <BuildCircleIcon fontSize="large"/>
+                                        관리자
                                 </MenuItem>
                                 <Divider />
                                 <MenuItem onClick={handleGoogleLogout}>

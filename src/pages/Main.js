@@ -7,7 +7,7 @@ import mainImg from "@Styles/mainImg.png";
 
 
 function Main() {
-    console.log("11");
+    
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userData, setUserData] = useState(null);
 

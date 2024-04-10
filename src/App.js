@@ -1,6 +1,7 @@
 import LogIn from "@Firebase/fbLogin";
 import Header from "@Components/Header";
 import Main from "@Pages/Main";
+import Admin from "@Pages/AdminPage";
 import Footer from "@Components/Footer";
 import "@Styles/App.css"
 
@@ -15,11 +16,12 @@ function App() {
 
     return (
       <Router>
-        <Header  />
-        {/*<Main />*/}
+        <Header/>
+
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/LogIn" element={<LogIn />} />
+          <Route path="/Admin" element={<Admin />} />
           <Route path="/Main" element={<Main />} />
         </Routes>
 

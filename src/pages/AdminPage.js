@@ -9,7 +9,7 @@ import {
     ImageList,
     ImageListItem,
     Input, Radio,
-    RadioGroup,
+    RadioGroup, Stack,
     TextField
 } from "@mui/material";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -108,7 +108,15 @@ function AdminPage() {
                                 value={roomCount}
                                 onChange={handleRoomCountChange}
                             />
-                            {renderTextField()}
+                            <Box component="form" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' },}}>
+
+                            <Stack direction="row" justifyContent="center">
+                                {renderTextField()}
+                                {renderTextField()}
+                            </Stack>
+
+                            </Box>
+
 
                         </Box>
                     </Card>

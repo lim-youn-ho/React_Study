@@ -30,7 +30,7 @@ function AdminPage() {
         setRoomCount(count);
     };
 
-    // 방 개수에 따라 TextField를 렌더링하는 함수
+
     const renderTextField = () => {
         const textFields = [];
         for (let i = 0; i < roomCount; i++) {
@@ -67,7 +67,7 @@ function AdminPage() {
                                 multiple
                                 onChange={imgUpload}
                                 accept="image/*"
-                                style={{ display: 'none' }} // 파일 입력 요소를 감춥니다.
+                                style={{ display: 'none' }}
                             />
                         </Button>
                         <br />
@@ -112,7 +112,7 @@ function AdminPage() {
 
                             <Stack direction="row" justifyContent="center">
                                 {renderTextField()}
-                                {renderTextField()}
+
                             </Stack>
 
                             </Box>

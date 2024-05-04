@@ -64,7 +64,7 @@ function App() {
     }
 
 
-    function saveUserData(){
+/*    function saveUserData(){
 
         axios.post('/api/saveUser',
             {
@@ -74,7 +74,7 @@ function App() {
         ).then(function (response) {
             console.log(response.data);
         });
-    }
+    }*/
 
     //로그아웃
     const auth = getAuth();

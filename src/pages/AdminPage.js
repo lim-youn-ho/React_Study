@@ -35,12 +35,24 @@ function AdminPage() {
         const textFields = [];
         for (let i = 0; i < roomCount; i++) {
             textFields.push(
-                <TextField
-                    key={i}
-                    id={`room-${i}`}
-                    label={`${i + 1} 번 room`}
-                    variant="outlined"
-                />
+                <div style={{ display: 'flex', marginBottom: '10px' }} key={i}>
+                    <TextField
+                        id={`room-${i}`}
+                        label={`${i + 1} 번 room`}
+                        variant="outlined"
+                        style={{ marginRight: '10px' }} // 각 TextField 사이에 간격을 추가
+                    />
+                    <TextField
+                        id={`room-${i}`}
+                        label={`${i + 1} 번 보증금`}
+                        variant="outlined"
+                    />
+                    <TextField
+                        id={`room-${i}`}
+                        label={`${i + 1} 번 월세`}
+                        variant="outlined"
+                    />
+                </div>
             );
         }
         return textFields;
@@ -88,7 +100,7 @@ function AdminPage() {
                 <Box  component="form" noValidate
                       autoComplete="off" sx={{maxHeight:600,display: 'inline-block', mx: '2px', transform: 'scale(0.8)',cols:1  }}>
                     <Card sx={{ width: 500 ,maxHeight:600, variant:"outlined",padding:'10px',margin:'10px'}}>
-                        <Box sx={{width: 300,  height: '600px', overflow: 'hidden' , display: 'flex', flexDirection: 'column', '& > *': { marginBottom: '20px' }  }}>
+                        <Box sx={{width: 400,  height: '600px', overflow: 'hidden' , display: 'flex', flexDirection: 'column', '& > *': { marginBottom: '20px' }  }}>
                             <TextField id="outlined-basic" label="지점명" variant="outlined" />
 
                             <FormControl>
@@ -110,7 +122,7 @@ function AdminPage() {
                             />
                             <Box component="form" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' },}}>
 
-                            <Stack direction="row" justifyContent="center">
+                            <Stack   justifyContent="center">
                                 {renderTextField()}
 
                             </Stack>
